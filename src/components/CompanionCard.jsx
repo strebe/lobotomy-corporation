@@ -6,7 +6,7 @@ const CATEGORY_STYLE = {
   tools:         { label: 'TOOL', color: 'text-tier-teth/80 border-tier-teth/30 bg-tier-teth/5' },
 }
 
-export default function CompanionCard({ entry, category, onClick, onRemove }) {
+export default function CompanionCard({ entry, category, index, onClick, onRemove }) {
   const cat = CATEGORY_STYLE[category] ?? { label: category.toUpperCase(), color: 'text-moonstone-dark/50 border-gold/20' }
 
   return (
@@ -14,6 +14,15 @@ export default function CompanionCard({ entry, category, onClick, onRemove }) {
       className="relative group cursor-pointer card-base card-hover bg-navy-900/90"
       onClick={onClick}
     >
+      {/* Index badge */}
+      {index != null && (
+        <span className="absolute top-1.5 left-1.5 z-10 w-5 h-5 flex items-center justify-center
+          bg-navy-950/80 border border-gold/30 font-mono text-[10px] text-gold/50
+          group-hover:text-gold group-hover:border-gold/60 transition-colors leading-none">
+          {index}
+        </span>
+      )}
+
       {/* Remove button */}
       <button
         onClick={(e) => { e.stopPropagation(); onRemove() }}

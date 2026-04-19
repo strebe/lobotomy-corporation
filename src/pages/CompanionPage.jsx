@@ -32,15 +32,34 @@ export default function CompanionPage() {
       if (e.ctrlKey && e.key === 'a') {
         e.preventDefault()
         window.dispatchEvent(new Event('open-companion-picker'))
+        return
+      }
+      if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
+        const n = parseInt(e.key, 10)
+        if (n >= 1 && n <= board.length) {
+          e.preventDefault()
+          const { id, category } = board[n - 1]
+          setSelected({ id, category })
+        }
       }
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [])
+  }, [board])
+
+  const selectedIndex = selected
+    ? board.findIndex(x => x.id === selected.id && x.category === selected.category)
+    : -1
 
   function remove(id, category) {
     setBoard(prev => prev.filter(x => !(x.id === id && x.category === category)))
     if (selected?.id === id && selected?.category === category) setSelected(null)
+  }
+
+  function navigate(delta) {
+    if (selectedIndex < 0) return
+    const next = selectedIndex + delta
+    if (next >= 0 && next < board.length) setSelected(board[next])
   }
 
   return (
@@ -65,10 +84,16 @@ export default function CompanionPage() {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="hint-glitter hidden sm:flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider">
-            <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
-            +<span className="text-gold/60">A</span>
-          </span>
+          <div className="hidden sm:flex items-center divide-x divide-gold/15">
+            <span className="flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider pr-3">
+              <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">1–9</kbd>
+              <span>to open</span>
+            </span>
+            <span className="hint-glitter flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider pl-3">
+              <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
+              +<span className="text-gold/60">A</span>
+            </span>
+          </div>
           <button
             onClick={() => window.dispatchEvent(new Event('open-companion-picker'))}
             className="flex items-center gap-1.5 text-xs font-mono text-gold/50 hover:text-gold
@@ -102,7 +127,7 @@ export default function CompanionPage() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-            {board.map(({ id, category }) => {
+            {board.map(({ id, category }, idx) => {
               const entry = getById(category, id)
               if (!entry) return null
               return (
@@ -110,6 +135,7 @@ export default function CompanionPage() {
                   key={`${category}-${id}`}
                   entry={entry}
                   category={category}
+                  index={idx + 1}
                   onClick={() => setSelected({ id, category })}
                   onRemove={() => remove(id, category)}
                 />
@@ -123,6 +149,10 @@ export default function CompanionPage() {
         entryId={selected?.id}
         category={selected?.category}
         onClose={() => setSelected(null)}
+        onPrev={() => navigate(-1)}
+        onNext={() => navigate(1)}
+        index={selectedIndex}
+        total={board.length}
       />
     </motion.div>
   )

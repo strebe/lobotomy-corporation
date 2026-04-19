@@ -109,10 +109,13 @@ export default function Navbar() {
             <kbd className="text-[9px] font-mono text-gold/70 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
             +<span className="text-gold/70">1–4</span> to navigate
           </span>
-          <span className="hidden md:flex items-center gap-1.5 px-4 text-[10px] font-mono text-moonstone-dark/55 tracking-wider whitespace-nowrap">
+          <button
+            onClick={() => window.dispatchEvent(new Event('open-global-search'))}
+            className="hidden md:flex items-center gap-1.5 px-4 text-[10px] font-mono text-moonstone-dark/55 tracking-wider whitespace-nowrap hover:text-moonstone-dark/80 transition-colors"
+          >
             <kbd className="text-[9px] font-mono text-gold/70 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
             +<span className="text-gold/70">L</span> to search
-          </span>
+          </button>
           <div className="flex items-center px-4 w-56 shrink-0">
             <StatusTicker />
           </div>

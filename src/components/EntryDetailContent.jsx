@@ -83,14 +83,25 @@ function ToolNotes({ data }) {
       {data.effects?.length > 0 && (
         <div>
           <p className="section-label mb-2">Effects</p>
-          <ol className="space-y-2">
+          <div>
             {data.effects.map((e, i) => (
-              <li key={i}>
-                <span className="font-mono text-xs text-gold-muted mr-2">{e.label}</span>
-                <RichText text={e.text} className="text-xs text-moonstone/80" />
-              </li>
+              <div key={i}>
+                {i > 0 && (
+                  <div className="relative my-3 flex items-center gap-2">
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
+                    <div className="w-1 h-1 rounded-full bg-gold/30" />
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-gold/25 to-transparent" />
+                  </div>
+                )}
+                <span className="inline-block font-mono text-[10px] tracking-widest uppercase text-gold/60 mb-1.5">
+                  {e.label}
+                </span>
+                <p className="text-sm text-moonstone/85 leading-relaxed">
+                  <RichText text={e.text} />
+                </p>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
       )}
     </div>

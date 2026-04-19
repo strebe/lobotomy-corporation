@@ -59,7 +59,8 @@
       "Bash(curl -sL -w '%{http_code}|%{content_type}|%{size_download}' -o d:/Git/lobotomy-corporation/public/images/abnormalities/t-04-16-02.png https://limbuscompany.wiki.gg/images/MD_Hurting_Teddy_Bear.png)",
       "Bash(curl -sL \"https://projectmoon.miraheze.org/w/api.php?action=query&titles=File:LC-100103-AbnoIcon.webp&prop=imageinfo&iiprop=url&format=json\")",
       "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); const pages=d.query.pages; const p=Object.values\\(pages\\)[0]; console.log\\(p.imageinfo?.[0]?.url ?? 'not found'\\)\")",
-      "Bash(curl -sL -w '%{http_code}|%{content_type}' -o d:/Git/lobotomy-corporation/public/images/abnormalities/der-freischutz.webp https://static.wikitide.net/projectmoonwiki/2/2a/LC-100103-AbnoIcon.webp)"
+      "Bash(curl -sL -w '%{http_code}|%{content_type}' -o d:/Git/lobotomy-corporation/public/images/abnormalities/der-freischutz.webp https://static.wikitide.net/projectmoonwiki/2/2a/LC-100103-AbnoIcon.webp)",
+      "Bash(curl -sL -w '%{http_code}|%{content_type}' -o d:/Git/lobotomy-corporation/public/images/tools/o-09-91.png https://static.wikia.nocookie.net/lobotomycorp/images/c/c1/PortraitofAnotherWorldPortrait.png)"
     ]
   }
 }

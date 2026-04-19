@@ -4,17 +4,26 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { getById } from '../data'
 import CompanionCard from '../components/CompanionCard'
 import CompanionDetailModal from '../components/CompanionDetailModal'
+import RoundPlannerPanel from '../components/RoundPlannerPanel'
 
 export default function CompanionPage() {
   const [board, setBoard] = useState(() => {
     try { return JSON.parse(localStorage.getItem('companion-board') ?? '[]') } catch { return [] }
   })
-  const [selected, setSelected] = useState(null) // { id, category } | null
+  const [selected,     setSelected]     = useState(null)
   const [confirmClear, setConfirmClear] = useState(false)
+  const [plannerOpen,  setPlannerOpen]  = useState(false)
+  const [employees,    setEmployees]    = useState(() => {
+    try { return JSON.parse(localStorage.getItem('companion-employees') ?? '[]') } catch { return [] }
+  })
 
   useEffect(() => {
     localStorage.setItem('companion-board', JSON.stringify(board))
   }, [board])
+
+  useEffect(() => {
+    localStorage.setItem('companion-employees', JSON.stringify(employees))
+  }, [employees])
 
   useEffect(() => {
     const handler = (e) => {
@@ -36,6 +45,15 @@ export default function CompanionPage() {
         window.dispatchEvent(new Event('open-companion-picker'))
         return
       }
+      if (e.ctrlKey && e.key === 'e') {
+        e.preventDefault()
+        setPlannerOpen(prev => !prev)
+        return
+      }
+      if (e.key === 'Escape') {
+        setPlannerOpen(false)
+        return
+      }
       if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
         const n = parseInt(e.key, 10)
         if (n >= 1 && n <= board.length) {
@@ -52,6 +70,13 @@ export default function CompanionPage() {
   const selectedIndex = selected
     ? board.findIndex(x => x.id === selected.id && x.category === selected.category)
     : -1
+
+  const boardItems = board
+    .map(({ id, category }) => {
+      const entry = getById(category, id)
+      return entry ? { id, name: entry.name, category } : null
+    })
+    .filter(Boolean)
 
   function remove(id, category) {
     setBoard(prev => prev.filter(x => !(x.id === id && x.category === category)))
@@ -75,7 +100,7 @@ export default function CompanionPage() {
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className="flex flex-col gap-5 border border-gold/35 overflow-hidden"
+      className="flex flex-col border border-gold/35 overflow-hidden h-full"
       style={{ clipPath: 'polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px))' }}
     >
       {/* Panel header */}
@@ -102,14 +127,30 @@ export default function CompanionPage() {
               Remove All
             </button>
           )}
-          <div className="hidden sm:flex items-center divide-x divide-gold/15">
-            <span className="flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider pr-3">
-              <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">1–9</kbd>
+          <button
+            onClick={() => setPlannerOpen(prev => !prev)}
+            className={`hint-glitter flex items-center gap-1.5 text-xs font-mono
+              border px-3 py-1 transition-all
+              ${plannerOpen
+                ? 'text-gold border-gold/60 bg-gold/10'
+                : 'text-gold/50 hover:text-gold border-gold/25 hover:border-gold/60 bg-navy-800/60 hover:bg-navy-800'
+              }`}
+          >
+            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+            </svg>
+            Round Planner
+            <kbd className="text-[9px] font-mono text-gold/40 bg-navy-800 border border-gold/25 px-1 py-0.5 leading-none">Ctrl+E</kbd>
+          </button>
+          <div className="hidden sm:flex items-center divide-x divide-gold/20">
+            <span className="flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/70 tracking-wider pr-3">
+              <kbd className="text-[9px] font-mono text-gold/80 bg-navy-800 border border-gold/50 px-1 py-0.5 leading-none">1–9</kbd>
               <span>to open</span>
             </span>
-            <span className="hint-glitter flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider pl-3">
-              <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
-              +<span className="text-gold/60">A</span>
+            <span className="flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/70 tracking-wider pl-3">
+              <kbd className="text-[9px] font-mono text-gold/80 bg-navy-800 border border-gold/50 px-1 py-0.5 leading-none">Ctrl</kbd>
+              +<span className="text-gold/80">A</span>
+              <span>to add</span>
             </span>
           </div>
           <button
@@ -126,43 +167,67 @@ export default function CompanionPage() {
         </div>
       </div>
 
-      {/* Board */}
-      <div className="px-5 pb-5">
-        {board.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-            <svg className="w-10 h-10 text-gold/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
-            </svg>
-            <p className="font-mono text-xs text-moonstone-dark/35 tracking-wider">
-              No entries on board.
-            </p>
-            <button
-              onClick={() => window.dispatchEvent(new Event('open-companion-picker'))}
-              className="text-xs font-mono text-gold/40 hover:text-gold transition-colors underline underline-offset-2"
+      {/* Content row: board + planner */}
+      <div className="flex flex-1 min-h-0 relative">
+
+        {/* Board */}
+        <div className="flex-1 min-w-0 overflow-y-auto px-5 pb-5 pt-3">
+          {board.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
+              <svg className="w-10 h-10 text-gold/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+              </svg>
+              <p className="font-mono text-xs text-moonstone-dark/35 tracking-wider">No entries on board.</p>
+              <button
+                onClick={() => window.dispatchEvent(new Event('open-companion-picker'))}
+                className="text-xs font-mono text-gold/40 hover:text-gold transition-colors underline underline-offset-2"
+              >
+                Add your first abnormality →
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+              {board.map(({ id, category }, idx) => {
+                const entry = getById(category, id)
+                if (!entry) return null
+                return (
+                  <CompanionCard
+                    key={`${category}-${id}`}
+                    entry={entry}
+                    category={category}
+                    index={idx + 1}
+                    onClick={() => setSelected({ id, category })}
+                    onRemove={() => remove(id, category)}
+                  />
+                )
+              })}
+            </div>
+          )}
+
+        </div>
+
+        {/* Planner panel — slides in from right */}
+        <AnimatePresence>
+          {plannerOpen && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 520, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="shrink-0 border-l border-gold/25 overflow-hidden h-full"
             >
-              Add your first abnormality →
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-            {board.map(({ id, category }, idx) => {
-              const entry = getById(category, id)
-              if (!entry) return null
-              return (
-                <CompanionCard
-                  key={`${category}-${id}`}
-                  entry={entry}
-                  category={category}
-                  index={idx + 1}
-                  onClick={() => setSelected({ id, category })}
-                  onRemove={() => remove(id, category)}
-                />
-              )
-            })}
-          </div>
-        )}
+              <RoundPlannerPanel
+                boardItems={boardItems}
+                employees={employees}
+                setEmployees={setEmployees}
+                onClose={() => setPlannerOpen(false)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
+      {/* Confirm clear portal */}
       {createPortal(
         <AnimatePresence>
           {confirmClear && (

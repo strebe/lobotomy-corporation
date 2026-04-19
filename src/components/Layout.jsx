@@ -57,11 +57,11 @@ export default function Layout() {
   const location = useLocation()
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="h-screen flex flex-col relative overflow-hidden">
       <CornerDecorations />
       <Navbar />
 
-      <main className="flex-1 flex flex-col px-8 pt-6 pb-2">
+      <main className="flex-1 flex flex-col px-8 pt-6 pb-2 overflow-y-auto min-h-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}

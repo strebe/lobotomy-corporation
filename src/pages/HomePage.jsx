@@ -20,7 +20,19 @@ const CATEGORY_ICONS = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
     </svg>
   ),
+  companion: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-7 h-7">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+    </svg>
+  ),
 }
+
+const NAV_ENTRIES = [
+  { key: 'abnormalities', to: '/abnormalities', label: 'Abnormalities', description: 'Anomalous entities contained within the facility. Each poses unique risk and research value.', shortcut: 'Ctrl+2' },
+  { key: 'tools',         to: '/tools',         label: 'Tools',         description: 'Equipment derived from abnormality research. Classified by usage type and risk tier.',          shortcut: 'Ctrl+3' },
+  { key: 'ordeals',       to: '/ordeals',       label: 'Ordeals',       description: 'Wave incursions drawn at designated cycle intervals. Severity scales with facility progress.',  shortcut: 'Ctrl+4' },
+  { key: 'companion',     to: '/companion',     label: 'Companion',     description: 'Active session board. Pin abnormalities and tools for quick reference during play.',             shortcut: 'Ctrl+5' },
+]
 
 const cardVariants = {
   hidden: { opacity: 0, y: 16 },
@@ -35,8 +47,9 @@ const containerVariants = {
 export default function HomePage() {
   const counts = {
     abnormalities: getAll('abnormalities').length,
-    tools: getAll('tools').length,
-    ordeals: getAll('ordeals').length,
+    tools:         getAll('tools').length,
+    ordeals:       getAll('ordeals').length,
+    companion:     (() => { try { return JSON.parse(localStorage.getItem('companion-board') ?? '[]').length } catch { return 0 } })(),
   }
 
   return (
@@ -115,52 +128,53 @@ export default function HomePage() {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-gold/15"
+          className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-gold/15"
         >
-          {Object.entries(CATEGORY_META).map(([category, meta], idx) => (
-            <motion.div key={category} variants={cardVariants}>
-              <Link to={`/${category}`} className="block group h-full overflow-hidden relative">
-                <div className="px-6 py-5 h-full flex flex-col gap-3 transition-colors duration-200 group-hover:bg-gold/5">
+          {NAV_ENTRIES.map(({ key, to, label, description, shortcut }) => (
+            <motion.div key={key} variants={cardVariants}>
+              <Link to={to} className="block group h-full overflow-hidden relative">
+                <div className="px-5 py-5 h-full flex flex-col gap-3 transition-colors duration-200 group-hover:bg-gold/5">
                   {/* Icon + count row */}
                   <div className="flex items-start justify-between">
                     <span className="text-gold/60 group-hover:text-gold transition-colors">
-                      {CATEGORY_ICONS[category]}
+                      {CATEGORY_ICONS[key]}
                     </span>
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="font-counter text-2xl font-bold text-gold/30 group-hover:text-gold/70 transition-all duration-300 leading-none tracking-widest"
                         style={{ fontVariantNumeric: 'tabular-nums' }}
                       >
-                        {String(counts[category]).padStart(2, '0')}
+                        {String(counts[key]).padStart(2, '0')}
                       </span>
-                      <span className="font-mono text-[10px] text-gold/20 group-hover:text-gold/45 transition-colors tracking-wider">entries</span>
+                      <span className="font-mono text-[10px] text-gold/20 group-hover:text-gold/45 transition-colors tracking-wider">
+                        {key === 'companion' ? 'on board' : 'entries'}
+                      </span>
                     </div>
                   </div>
 
                   {/* Title + desc */}
                   <div className="flex-1">
-                    <h2 className="font-display text-xl text-moonstone group-hover:text-gold transition-colors mb-1.5">
-                      {meta.label}
+                    <h2 className="font-display text-lg text-moonstone group-hover:text-gold transition-colors mb-1.5">
+                      {label}
                     </h2>
                     <p className="text-xs text-moonstone-dark/55 leading-relaxed">
-                      {meta.description}
+                      {description}
                     </p>
                   </div>
 
                   {/* Bottom arrow + shortcut */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5 text-xs font-mono text-gold/40 group-hover:text-gold transition-colors">
-                      <span>View all</span>
+                      <span>{key === 'companion' ? 'Open board' : 'View all'}</span>
                       <svg className="w-3 h-3 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                       </svg>
                     </div>
                     <kbd className="text-[10px] font-mono text-gold/55 bg-navy-800 border border-gold/25 px-1.5 py-0.5 tracking-wide">
-                      Ctrl+{idx + 2}
+                      {shortcut}
                     </kbd>
                   </div>
                 </div>
-                {/* Bottom fill line on hover — contained properly */}
                 <div className="absolute bottom-0 left-0 right-0 h-px bg-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
               </Link>
             </motion.div>

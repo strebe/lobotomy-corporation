@@ -30,7 +30,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-04-25",
@@ -63,14 +64,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-04-83",
     "name": "Fairy Festival",
     "code": "F-04-83",
     "level": "Zayin",
-    "image": null,
+    "image": "f-04-83.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -180,7 +182,8 @@
         }
       ],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-02-44",
@@ -220,14 +223,15 @@
         }
       ],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "t-05-51",
     "name": "Bloodbath",
     "code": "T-05-51",
     "level": "Teth",
-    "image": null,
+    "image": "t-05-51.png",
     "notes": "Temperance threshold",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -286,14 +290,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "o-05-61",
     "name": "Crumbling Armor",
     "code": "O-05-61",
     "level": "Teth",
-    "image": null,
+    "image": "o-05-61.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -408,7 +413,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-01-11-12",
@@ -440,7 +446,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-01-11-15",
@@ -474,14 +481,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "t-01-54",
     "name": "Forsaken Murderer",
     "code": "T-01-54",
     "level": "Teth",
-    "image": null,
+    "image": "t-01-54.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -638,14 +646,15 @@
         "Either overall Good work with the abnormality causes the qlipoph to drop, either is only attachment good;",
         "very likely that attachment work with other abnormalities also drop que qlipoph count in 1."
       ]
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "o-04-84",
     "name": "Meat Lantern",
     "code": "O-04-84",
     "level": "Teth",
-    "image": null,
+    "image": "o-04-84.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -759,7 +768,7 @@
     "name": "Ppodae",
     "code": "D-02-107",
     "level": "Teth",
-    "image": null,
+    "image": "d-02-107.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -793,7 +802,7 @@
     "name": "Punishing Bird",
     "code": "O-02-56",
     "level": "Teth",
-    "image": null,
+    "image": "o-02-56.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -854,7 +863,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "f-01-02",
@@ -980,14 +990,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "spider-bud",
     "name": "Spider Bud",
     "code": null,
     "level": "Teth",
-    "image": null,
+    "image": "spider-bud.png",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -1074,7 +1085,7 @@
     "name": "Void Dream",
     "code": "T-02-99",
     "level": "Teth",
-    "image": null,
+    "image": "t-02-99.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1162,7 +1173,8 @@
         }
       ],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "der-freischutz",
@@ -1192,7 +1204,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "t-01-68",
@@ -1233,7 +1246,7 @@
     "name": "Laetitia",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "laetitia.png",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -1269,7 +1282,7 @@
     "name": "Plague Doctor",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "plague-doctor.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1398,14 +1411,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "singing-machine",
     "name": "Singing Machine",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "singing-machine.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1574,7 +1588,8 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "wayward-passenger",
@@ -1640,14 +1655,15 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    }
+    },
+    "imageSkip": true
   },
   {
     "id": "o-03-88",
     "name": "Dimensional Refraction Variant",
     "code": "O-03-88",
     "level": "Waw",
-    "image": null,
+    "image": "o-03-88.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1681,7 +1697,7 @@
     "name": "Blue Star",
     "code": "O-03-93",
     "level": "Aleph",
-    "image": null,
+    "image": "o-03-93.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,

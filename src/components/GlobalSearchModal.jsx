@@ -6,17 +6,22 @@ import TierBadge from './TierBadge'
 
 export default function GlobalSearchModal() {
   const [open, setOpen] = useState(false)
+  const [mode, setMode] = useState('navigate') // 'navigate' | 'add'
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const inputRef = useRef(null)
   const listRef = useRef(null)
   const navigate = useNavigate()
 
-  const results = searchAll(query)
+  const allResults = searchAll(query)
+  const results = mode === 'add'
+    ? allResults.filter(r => r.category === 'abnormalities' || r.category === 'tools')
+    : allResults
 
-  // Open on custom event dispatched by GlobalKeyHandler
+  // Open in navigate mode (Ctrl+L)
   useEffect(() => {
     const handler = () => {
+      setMode('navigate')
       setOpen(true)
       setQuery('')
       setSelectedIndex(-1)
@@ -24,6 +29,19 @@ export default function GlobalSearchModal() {
     window.addEventListener('open-global-search', handler)
     return () => window.removeEventListener('open-global-search', handler)
   }, [])
+
+  // Open in add-to-board mode (Companion picker)
+  useEffect(() => {
+    const handler = () => {
+      if (open) return // don't overlap if already open
+      setMode('add')
+      setOpen(true)
+      setQuery('')
+      setSelectedIndex(-1)
+    }
+    window.addEventListener('open-companion-picker', handler)
+    return () => window.removeEventListener('open-companion-picker', handler)
+  }, [open])
 
   // Focus input when modal opens
   useEffect(() => {
@@ -47,7 +65,11 @@ export default function GlobalSearchModal() {
   }
 
   function openResult(r) {
-    navigate(`/${r.category}/${r.id}`)
+    if (mode === 'add') {
+      window.dispatchEvent(new CustomEvent('companion-add-entry', { detail: { id: r.id, category: r.category } }))
+    } else {
+      navigate(`/${r.category}/${r.id}`)
+    }
     close()
   }
 
@@ -106,7 +128,7 @@ export default function GlobalSearchModal() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="Search entries, codes, notes…"
+                  placeholder={mode === 'add' ? 'Add abnormality or tool to board…' : 'Search entries, codes, notes…'}
                   className="flex-1 bg-transparent text-moonstone text-base font-mono
                     placeholder-moonstone-dark/35 focus:outline-none"
                 />
@@ -171,7 +193,7 @@ export default function GlobalSearchModal() {
                   <kbd className="text-gold/50">↑↓</kbd> navigate
                 </span>
                 <span className="text-xs font-mono text-moonstone-dark/40">
-                  <kbd className="text-gold/50">↵</kbd> open
+                  <kbd className="text-gold/50">↵</kbd> {mode === 'add' ? 'add to board' : 'open'}
                 </span>
                 <span className="text-xs font-mono text-moonstone-dark/40">
                   <kbd className="text-gold/50">esc</kbd> close

@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: '/abnormalities', label: 'Abnormalities' },
   { to: '/tools',         label: 'Tools'         },
   { to: '/ordeals',       label: 'Ordeals'       },
+  { to: '/companion',     label: 'Companion'     },
 ]
 
 const STATUS_MESSAGES = [

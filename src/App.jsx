@@ -5,8 +5,9 @@ import GlobalSearchModal from './components/GlobalSearchModal'
 import HomePage from './pages/HomePage'
 import ListPage from './pages/ListPage'
 import DetailPage from './pages/DetailPage'
+import CompanionPage from './pages/CompanionPage'
 
-const NAV_SHORTCUTS = { '1': '/', '2': '/abnormalities', '3': '/tools', '4': '/ordeals' }
+const NAV_SHORTCUTS = { '1': '/', '2': '/abnormalities', '3': '/tools', '4': '/ordeals', '5': '/companion' }
 
 function GlobalKeyHandler() {
   const location = useLocation()
@@ -44,6 +45,7 @@ export default function App() {
           <Route path="/tools/:id" element={<DetailPage category="tools" />} />
           <Route path="/ordeals" element={<ListPage category="ordeals" />} />
           <Route path="/ordeals/:id" element={<DetailPage category="ordeals" />} />
+          <Route path="/companion" element={<CompanionPage />} />
         </Route>
       </Routes>
     </HashRouter>

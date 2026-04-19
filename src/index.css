@@ -48,6 +48,18 @@
   ::-webkit-scrollbar-thumb:hover { background: #00ff99; }
 }
 
+@keyframes hint-glitter {
+  0%, 100% { opacity: 0.55; }
+  20%       { opacity: 1;    }
+  40%       { opacity: 0.4;  }
+  60%       { opacity: 0.9;  }
+  80%       { opacity: 0.5;  }
+}
+
+.hint-glitter {
+  animation: hint-glitter 3s ease-in-out infinite;
+}
+
 @keyframes tab-scan {
   0%   { top: -10%; opacity: 0; }
   5%   { opacity: 0.55; }

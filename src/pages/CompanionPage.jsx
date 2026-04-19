@@ -5,6 +5,7 @@ import { getById } from '../data'
 import CompanionCard from '../components/CompanionCard'
 import CompanionDetailModal from '../components/CompanionDetailModal'
 import RoundPlannerPanel from '../components/RoundPlannerPanel'
+import UnknownAbnormalityModal from '../components/UnknownAbnormalityModal'
 
 export default function CompanionPage() {
   const [board, setBoard] = useState(() => {
@@ -16,6 +17,10 @@ export default function CompanionPage() {
   const [employees,    setEmployees]    = useState(() => {
     try { return JSON.parse(localStorage.getItem('companion-employees') ?? '[]') } catch { return [] }
   })
+  const [unknowns,     setUnknowns]     = useState(() => {
+    try { return JSON.parse(localStorage.getItem('companion-unknown') ?? '[]') } catch { return [] }
+  })
+  const [unknownSheet, setUnknownSheet] = useState(null)
 
   useEffect(() => {
     localStorage.setItem('companion-board', JSON.stringify(board))
@@ -24,6 +29,10 @@ export default function CompanionPage() {
   useEffect(() => {
     localStorage.setItem('companion-employees', JSON.stringify(employees))
   }, [employees])
+
+  useEffect(() => {
+    localStorage.setItem('companion-unknown', JSON.stringify(unknowns))
+  }, [unknowns])
 
   useEffect(() => {
     const handler = (e) => {
@@ -55,6 +64,8 @@ export default function CompanionPage() {
         return
       }
       if (!e.ctrlKey && !e.altKey && !e.metaKey && !e.shiftKey) {
+        const tag = document.activeElement?.tagName
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
         const n = parseInt(e.key, 10)
         if (n >= 1 && n <= board.length) {
           e.preventDefault()
@@ -87,6 +98,18 @@ export default function CompanionPage() {
     setBoard([])
     setSelected(null)
     setConfirmClear(false)
+  }
+
+  function saveUnknown(entry) {
+    setUnknowns(prev => {
+      const exists = prev.find(u => u.id === entry.id)
+      return exists ? prev.map(u => u.id === entry.id ? entry : u) : [...prev, entry]
+    })
+  }
+
+  function deleteUnknown(id) {
+    setUnknowns(prev => prev.filter(u => u.id !== id))
+    setUnknownSheet(null)
   }
 
   function navigate(delta) {
@@ -172,18 +195,27 @@ export default function CompanionPage() {
 
         {/* Board */}
         <div className="flex-1 min-w-0 overflow-y-auto px-5 pb-5 pt-3">
-          {board.length === 0 ? (
+          {board.length === 0 && unknowns.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
               <svg className="w-10 h-10 text-gold/15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
               </svg>
               <p className="font-mono text-xs text-moonstone-dark/35 tracking-wider">No entries on board.</p>
-              <button
-                onClick={() => window.dispatchEvent(new Event('open-companion-picker'))}
-                className="text-xs font-mono text-gold/40 hover:text-gold transition-colors underline underline-offset-2"
-              >
-                Add your first abnormality →
-              </button>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => window.dispatchEvent(new Event('open-companion-picker'))}
+                  className="text-xs font-mono text-gold/40 hover:text-gold transition-colors underline underline-offset-2"
+                >
+                  Add your first abnormality →
+                </button>
+                <span className="text-moonstone-dark/20 font-mono text-xs">or</span>
+                <button
+                  onClick={() => setUnknownSheet('new')}
+                  className="text-xs font-mono text-moonstone/30 hover:text-moonstone transition-colors underline underline-offset-2"
+                >
+                  Create a field note →
+                </button>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
@@ -201,6 +233,59 @@ export default function CompanionPage() {
                   />
                 )
               })}
+
+              {unknowns.map((u, idx) => (
+                <div
+                  key={u.id}
+                  className="relative group cursor-pointer card-base card-hover bg-navy-900/90 border border-gold/15"
+                  onClick={() => setUnknownSheet(u)}
+                >
+                  <span className="absolute top-1.5 left-1.5 z-10 w-5 h-5 flex items-center justify-center
+                    bg-navy-950/80 border border-gold/30 font-mono text-[10px] text-gold/50
+                    group-hover:text-gold group-hover:border-gold/60 transition-colors leading-none">
+                    {board.length + idx + 1}
+                  </span>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); deleteUnknown(u.id) }}
+                    className="absolute top-1.5 right-1.5 z-10 opacity-0 group-hover:opacity-100
+                      w-5 h-5 flex items-center justify-center
+                      bg-navy-950/80 border border-gold/30 text-gold/60
+                      hover:text-gold hover:border-gold/70 transition-all text-xs leading-none"
+                    title="Remove entry"
+                  >
+                    ×
+                  </button>
+                  <div className="w-full aspect-square overflow-hidden border-b border-gold/10
+                    flex items-center justify-center bg-navy-900">
+                    <span className="font-display text-4xl text-gold/10">?</span>
+                  </div>
+                  <div className="p-2.5 space-y-1.5">
+                    <p className="font-display text-xs text-moonstone leading-tight line-clamp-2">
+                      {u.name || '—'}
+                    </p>
+                    {u.level && (
+                      <p className="font-mono text-[10px] text-moonstone-dark/40">{u.level}</p>
+                    )}
+                    <span className="inline-block font-mono text-[9px] tracking-widest px-1 py-px border
+                      text-moonstone/50 border-moonstone/20 bg-moonstone/5">
+                      FIELD NOTES
+                    </span>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                onClick={() => setUnknownSheet('new')}
+                className="card-base border border-dashed border-gold/15 hover:border-gold/40
+                  flex flex-col items-center justify-center gap-2
+                  text-gold/20 hover:text-gold/50 transition-all cursor-pointer
+                  bg-navy-900/40 hover:bg-navy-900/70 aspect-square"
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+                <span className="font-mono text-[9px] tracking-widest uppercase">Field Notes</span>
+              </button>
             </div>
           )}
 
@@ -280,6 +365,15 @@ export default function CompanionPage() {
         index={selectedIndex}
         total={board.length}
       />
+
+      {unknownSheet != null && (
+        <UnknownAbnormalityModal
+          entry={unknownSheet === 'new' ? null : unknownSheet}
+          onSave={saveUnknown}
+          onDelete={deleteUnknown}
+          onClose={() => setUnknownSheet(null)}
+        />
+      )}
     </motion.div>
   )
 }

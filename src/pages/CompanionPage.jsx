@@ -82,12 +82,15 @@ export default function CompanionPage() {
     ? board.findIndex(x => x.id === selected.id && x.category === selected.category)
     : -1
 
-  const boardItems = board
-    .map(({ id, category }) => {
-      const entry = getById(category, id)
-      return entry ? { id, name: entry.name, category } : null
-    })
-    .filter(Boolean)
+  const boardItems = [
+    ...board
+      .map(({ id, category }) => {
+        const entry = getById(category, id)
+        return entry ? { id, name: entry.name, category } : null
+      })
+      .filter(Boolean),
+    ...unknowns.map(u => ({ id: u.id, name: u.name || '—', category: 'unknown' })),
+  ]
 
   function remove(id, category) {
     setBoard(prev => prev.filter(x => !(x.id === id && x.category === category)))

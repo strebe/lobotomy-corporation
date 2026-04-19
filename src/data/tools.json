@@ -1,0 +1,357 @@
+[
+  {
+    "id": "t-09-85",
+    "name": "We Can Change Anything",
+    "code": "T-09-85",
+    "level": "Zayin",
+    "image": null,
+    "usageType": "Single Use",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Single Use",
+      "typeDefinition": "When an Employee works with the Tool, resolve its effects indiscriminately.",
+      "unlockConditions": [
+        "An employee has died as a result of We Can Change Anything."
+      ],
+      "effects": [
+        {
+          "label": "Effect 1",
+          "text": "Employees can be placed into We Can Change Anything, generating boxes of Enkephalin based on the stats of the employee."
+        },
+        {
+          "label": "Effect 2",
+          "text": "Employees placed into We Can Change Anything perished instantly. [Death]"
+        },
+        {
+          "label": "Effect 3",
+          "text": "However when the employee perished it generated 3 boxes of Enkephalin for each stat above 1 the employee had."
+        },
+        {
+          "label": "Effect 4",
+          "text": "This Enkephalin that was gained contributed to the Enkephalin box count of a single abnormality of the player's choice within that department."
+        }
+      ]
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "o-09-96",
+    "name": "Behavior Adjustment",
+    "code": "O-09-96",
+    "level": "Teth",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Equippable",
+      "typeDefinition": "When an Employee works with the Tool, give them a token of the same name as the Tool, and change the state of the Containment Cell to reflect that it is now empty. The Employee with this Tool 'equipped' may place it back within the cell by working with it again. If this Employee dies, the Tool is immediately sent back to the Containment Cell.",
+      "unlockConditions": [
+        "An employee has gone insane as a result of Behavior Adjustment."
+      ],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "t-04-10-06",
+    "name": "Have You Become Strong",
+    "code": "T-04-10-06",
+    "level": "Teth",
+    "image": null,
+    "usageType": "Single Use",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Single Use",
+      "typeDefinition": "When an Employee works with the Tool, resolve its effects indiscriminately.",
+      "unlockConditions": [
+        "Have You Become Strong reaches 0 Qliphoth for the first time."
+      ],
+      "effects": [
+        {
+          "label": "Effect 1",
+          "text": "This Tool has a Qliphoth counter of 3. When work was performed with Have You Become Strong the Qliphoth counter lowered by 1."
+        },
+        {
+          "label": "Effect 2",
+          "text": "When work was performed with this tool, the employee that worked with it increased their Health cap by +3. [Give Surgery Token] At the end of each cycle a single \"You Want To Get Beat? Hurtily?\" was placed into the hallways outside of the containment cell. This continued until the tool was raised back to a Qliphoth counter of 3. Each time this tool is worked with, the Qliphoth counter raised by 1. Additionally, no Health Cap increase was given to employees while \"You Want To Get Beat? Hurtily?\" were still being produced. When the Qliphoth counter was raised back to 3, all \"You Want To Get Beat? Hurtily?\" entities in the facility were suppressed immediately."
+        }
+      ]
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "t-09-78",
+    "name": "Notes from a Crazed Researcher",
+    "code": "T-09-78",
+    "level": "HE",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Equippable",
+      "typeDefinition": "When an Employee works with the Tool, give them a token of the same name as the Tool, and change the state of the Containment Cell to reflect that it is now empty. The Employee with this Tool 'equipped' may place it back within the cell by working with it again. If this Employee dies, the Tool is immediately sent back to the Containment Cell.",
+      "unlockConditions": [],
+      "effects": [
+        {
+          "label": "Effect 2",
+          "text": "The holder of the Notes from a Crazed Researcher received +2 to all rolls when performing work."
+        },
+        {
+          "label": "Effect 3",
+          "text": "After receiving a total of 10 damage of any type, the holder exploded. [Death] [7 AoE 🔴 Red Damage]"
+        }
+      ]
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "d-09-104",
+    "name": "Backward Clock",
+    "code": "D-09-104",
+    "level": "Waw",
+    "image": null,
+    "usageType": "Single Use",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Single Use",
+      "typeDefinition": "When an Employee works with the Tool, resolve its effects indiscriminately.",
+      "unlockConditions": [
+        "The Backwards Clock has gained 4 Wind Up Tokens."
+      ],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "t-09-79",
+    "name": "Flesh Idol",
+    "code": "T-09-79",
+    "level": "Waw",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Continuous Use",
+      "typeDefinition": "When an Employee works with the Tool, they will be placed inside the Containment Cell. The Employee becomes uncontrollable outside of subsequent Work Phases. By working with the Tool again in the following cycles, the Employee may attempt to leave (if possible).",
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": []
+    }
+  },
+  {
+    "id": "o-07-103",
+    "name": "Yang",
+    "code": "O-07-103",
+    "level": "Waw",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": true,
+    "hasEmpiricalResearch": false,
+    "toolNotes": {
+      "typeDescriptor": "Equippable",
+      "typeDefinition": "When an Employee works with the Tool, give them a token of the same name as the Tool, and change the state of the Containment Cell to reflect that it is now empty. The Employee with this Tool 'equipped' may place it back within the cell by working with it again. If this Employee dies, the Tool is immediately sent back to the Containment Cell.",
+      "unlockConditions": [
+        "\"Half of a pair that is missing each other.\""
+      ],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "When the Yang token holder died, a White Carp spawned in their place.",
+        "The White Carp's direction is set randomly on spawn and appears to follow the same direction in subsequent phases.",
+        "Each turn, the White Carp deals 7 damage to the facility.",
+        "Suppressed by 3 R-Corp units dealing a combined 76 damage in a single turn — classified as Overkill. Estimated durability: ~50 HP."
+      ]
+    }
+  },
+  {
+    "id": "express-train-to-hell",
+    "name": "Express Train to Hell",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Interaction 1: Employee entered and exited without incident. Employee had all stats at level 1 except Prudence at level 2.",
+        "Round 2: No interaction performed — Qliphoth counter lowered on its own at end of round.",
+        "Interaction 2: Interacted again — Qliphoth counter raised by 1. It was checked whether the employee was at full HP — nothing happened.",
+        "The tool may require specific conditions (possibly full HP) to trigger its main effect.",
+        "Qliphoth appears to drop passively if not interacted with each round — similar to abnormalities that punish inaction."
+      ]
+    }
+  },
+  {
+    "id": "luminous-bracelet",
+    "name": "Luminous Bracelet",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Upon interaction: Health Cap +5 for the employee.",
+        "Qliphoth of the entire department lowers by 1.",
+        "Interacting again returns the tool — no further effects recorded.",
+        "The employee holding the tool heals 5 in turn end. If any heal happened, the Qlipoph will not lower by 1."
+      ]
+    }
+  },
+  {
+    "id": "shelter-of-the-27th-of-march",
+    "name": "Shelter of the 27th of March",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "On the turn of entry: employee becomes trapped.",
+        "Qliphoth of a random abnormality in the department lowers by 1.",
+        "Apparently functions literally as a shelter.",
+        "Upon leaving: nothing happens."
+      ]
+    }
+  },
+  {
+    "id": "skin-prophecy",
+    "name": "Skin Prophecy",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Upon interaction: +1 Prudence and receive a Prophecy Token."
+      ]
+    }
+  },
+  {
+    "id": "the-heart-of-aspiration",
+    "name": "The Heart of Aspiration",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Upon interaction: +7 Health Cap and +7 Sanity Cap.",
+        "When the employee holding the status died, the Tool reseted."
+      ]
+    }
+  },
+  {
+    "id": "theresia",
+    "name": "Theresia",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Upon interaction: employee becomes trapped and takes 8 ⬜ White Damage."
+      ]
+    }
+  },
+  {
+    "id": "you-must-be-happy",
+    "name": "You Must be Happy",
+    "code": null,
+    "level": "",
+    "image": null,
+    "usageType": "Equippable",
+    "notes": "",
+    "hasNotes": false,
+    "hasEmpiricalResearch": true,
+    "toolNotes": {
+      "typeDescriptor": null,
+      "typeDefinition": null,
+      "unlockConditions": [],
+      "effects": []
+    },
+    "empiricalResearch": {
+      "observations": [
+        "Upon interaction, roll a Yes/No die:"
+      ]
+    }
+  }
+]

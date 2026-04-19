@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(npm create *)",
+      "Bash(npx create-vite@latest . --template react)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(node scripts/convert-md-to-json.js \"c:/Users/streb/Downloads/ef94e82a-9465-47f7-a088-b21b3471f4f0_ExportBlock-ba3597af-a457-405d-94be-0d2f9a61dc8a/faust-compendium-files\")",
+      "Bash(node scripts/convert-md-to-json.cjs \"c:/Users/streb/Downloads/ef94e82a-9465-47f7-a088-b21b3471f4f0_ExportBlock-ba3597af-a457-405d-94be-0d2f9a61dc8a/faust-compendium-files\")",
+      "Bash(node -e \"const d=require\\('./src/data/abnormalities.json'\\); console.log\\('Total:', d.length\\); console.log\\('With images:', d.filter\\(e=>e.image\\).map\\(e=>e.name\\)\\); console.log\\('Sample Scorched Girl:', JSON.stringify\\(d.find\\(e=>e.code==='F-01-02'\\), null, 2\\)\\)\")",
+      "Bash(node -e \"const d=require\\('./src/data/abnormalities.json'\\); console.log\\(d.find\\(e=>e.name.includes\\('One Sin'\\)\\)?.image\\); console.log\\('Names:', d.map\\(e=>e.name\\).sort\\(\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(curl -L \"https://lobotomycorporation.wiki.gg/images/ScorchedGirlPortrait.png?f4cf12\" -o \"d:/Git/lobotomy-corporation/public/images/abnormalities/f-01-02.png\")",
+      "Bash(node -e ' *)",
+      "Bash(node scripts/download-images.cjs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -A \"Mozilla/5.0\" \"https://lobotomycorporation.wiki.gg/images/PunishingBirdPortrait.png\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -A \"Mozilla/5.0\" \"https://lobotomycorporation.wiki.gg/images/SpiderBudPortrait.png\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" -A \"Mozilla/5.0\" \"https://lobotomycorporation.wiki.gg/images/BlueStarPortrait.png\")",
+      "Bash(node -e \"const d=require\\('./src/data/abnormalities.json'\\); console.log\\('total:', d.length, 'with images:', d.filter\\(e=>e.image\\).length\\); d.filter\\(e=>e.image\\).forEach\\(e=>console.log\\(e.name, '->', e.image\\)\\)\")",
+      "Bash(node -e \"const d=require\\('./src/data/abnormalities.json'\\); const e=d.find\\(x=>x.name.toLowerCase\\(\\).includes\\('one sin'\\)\\); console.log\\(JSON.stringify\\(e, null, 2\\)\\)\")",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('./src/data/tools.json'\\).slice\\(0,2\\), null, 2\\)\\)\")",
+      "Bash(node -e \"console.log\\(JSON.stringify\\(require\\('./src/data/ordeals.json'\\).slice\\(0,2\\), null, 2\\)\\)\")",
+      "Bash(node scripts/convert-tools-to-json.cjs \"c:/Users/streb/Downloads/ef94e82a-9465-47f7-a088-b21b3471f4f0_ExportBlock-ba3597af-a457-405d-94be-0d2f9a61dc8a/faust-compendium-files\")",
+      "Bash(node -e \"const d=require\\('./src/data/tools.json'\\); d.forEach\\(e=>console.log\\(e.name.padEnd\\(35\\), e.level||'—', e.hasNotes?'NOTES':'    ', e.hasEmpiricalResearch?'EMP':''\\)\\)\")",
+      "Bash(xxd)",
+      "Bash(curl -s -o /tmp/test-blue.png -w \"%{http_code} %{content_type} %{size_download}\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -H \"Referer: https://lobotomycorporation.wiki.gg/wiki/Blue_Star\" \"https://lobotomycorporation.wiki.gg/images/BlueStarPortrait.png?aac391\")",
+      "Read(//tmp/**)",
+      "Bash(node -e \"const abnorm = require\\('/d/Git/lobotomy-corporation/src/data/abnormalities.json'\\); console.log\\('Total entries:', abnorm.length\\); const hasIssues = abnorm.filter\\(e => !e.id || !e.name || e.id === null\\); console.log\\('Missing id or name:', hasIssues.length\\); if \\(hasIssues.length\\) console.log\\(JSON.stringify\\(hasIssues, null, 2\\)\\);\")",
+      "Bash(node -e \"const abnorm = require\\('./src/data/abnormalities.json'\\); console.log\\('Total abnormalities:', abnorm.length\\); const hasIssues = abnorm.filter\\(e => !e.id || !e.name\\); console.log\\('Missing id or name:', hasIssues.length\\);\")",
+      "Bash(node)",
+      "Bash(node -e \"const d=require\\('./src/data/abnormalities.json'\\); console.log\\(JSON.stringify\\(d.find\\(e=>e.hasManagerialNotes&&e.hasDefensiveNotes&&e.hasEmpiricalResearch\\), null, 2\\)\\)\")",
+      "Bash(node -e \"const d=require\\('./src/data/tools.json'\\); console.log\\(JSON.stringify\\(d.find\\(e=>e.hasNotes\\), null, 2\\)\\)\")"
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { createPortal } from 'react-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { getById } from '../data'
 import CompanionCard from '../components/CompanionCard'
 import CompanionDetailModal from '../components/CompanionDetailModal'
@@ -9,6 +10,7 @@ export default function CompanionPage() {
     try { return JSON.parse(localStorage.getItem('companion-board') ?? '[]') } catch { return [] }
   })
   const [selected, setSelected] = useState(null) // { id, category } | null
+  const [confirmClear, setConfirmClear] = useState(false)
 
   useEffect(() => {
     localStorage.setItem('companion-board', JSON.stringify(board))
@@ -56,6 +58,12 @@ export default function CompanionPage() {
     if (selected?.id === id && selected?.category === category) setSelected(null)
   }
 
+  function removeAll() {
+    setBoard([])
+    setSelected(null)
+    setConfirmClear(false)
+  }
+
   function navigate(delta) {
     if (selectedIndex < 0) return
     const next = selectedIndex + delta
@@ -84,6 +92,16 @@ export default function CompanionPage() {
           </span>
         </div>
         <div className="flex items-center gap-3">
+          {board.length > 0 && (
+            <button
+              onClick={() => setConfirmClear(true)}
+              className="text-xs font-mono text-gold/30 hover:text-tier-aleph
+                border border-gold/15 hover:border-tier-aleph/50
+                px-3 py-1 transition-all"
+            >
+              Remove All
+            </button>
+          )}
           <div className="hidden sm:flex items-center divide-x divide-gold/15">
             <span className="flex items-center gap-1 font-mono text-[10px] text-moonstone-dark/50 tracking-wider pr-3">
               <kbd className="text-[9px] font-mono text-gold/60 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">1–9</kbd>
@@ -144,6 +162,49 @@ export default function CompanionPage() {
           </div>
         )}
       </div>
+
+      {createPortal(
+        <AnimatePresence>
+          {confirmClear && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="fixed inset-0 bg-black/75 backdrop-blur-sm z-[200]"
+                onClick={() => setConfirmClear(false)}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                className="fixed inset-0 z-[201] flex items-center justify-center px-4 pointer-events-none"
+              >
+                <div
+                  className="pointer-events-auto bg-navy-950 border-2 border-gold/50 shadow-gold-lg px-8 py-6 flex flex-col gap-4 text-center"
+                  style={{ clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))' }}
+                >
+                  <p className="font-display text-base text-moonstone tracking-wide">Clear the entire board?</p>
+                  <p className="font-mono text-xs text-moonstone-dark/45">This will remove all {board.length} {board.length === 1 ? 'entry' : 'entries'}.</p>
+                  <div className="flex items-center justify-center gap-3 pt-1">
+                    <button
+                      onClick={() => setConfirmClear(false)}
+                      className="text-xs font-mono text-gold/50 hover:text-gold border border-gold/25 hover:border-gold/60 px-5 py-1.5 transition-all"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={removeAll}
+                      className="text-xs font-mono text-tier-aleph/70 hover:text-tier-aleph border border-tier-aleph/30 hover:border-tier-aleph/60 px-5 py-1.5 transition-all"
+                    >
+                      Remove All
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       <CompanionDetailModal
         entryId={selected?.id}

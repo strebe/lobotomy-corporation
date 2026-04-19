@@ -4,7 +4,7 @@
     "name": "Blubbering Toad",
     "code": "T-01-23-04",
     "level": "Zayin",
-    "image": null,
+    "image": "t-01-23-04.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -30,15 +30,14 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-04-25",
     "name": "Bottle of Tears",
     "code": "F-04-25",
     "level": "Zayin",
-    "image": null,
+    "image": "f-04-25.webp",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -64,8 +63,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-04-83",
@@ -139,7 +137,7 @@
     "name": "1.76 MHz",
     "code": "T-06-27",
     "level": "Teth",
-    "image": null,
+    "image": "t-06-27.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -182,15 +180,14 @@
         }
       ],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-02-44",
     "name": "Beauty and the Beast",
     "code": "F-02-44",
     "level": "Teth",
-    "image": null,
+    "image": "f-02-44.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -223,8 +220,7 @@
         }
       ],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "t-05-51",
@@ -264,7 +260,7 @@
     "name": "Brazen Bull",
     "code": "M-01-11-07",
     "level": "Teth",
-    "image": null,
+    "image": "m-01-11-07.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -290,8 +286,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "o-05-61",
@@ -352,7 +347,7 @@
     "name": "Drenched Gossypium",
     "code": "O-04-20-11",
     "level": "Teth",
-    "image": null,
+    "image": "o-04-20-11.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -386,7 +381,7 @@
     "name": "Faelantern",
     "code": "F-04-21-03",
     "level": "Teth",
-    "image": null,
+    "image": "f-04-21-03.webp",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -413,15 +408,14 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-01-11-12",
     "name": "Fairy Gentleman",
     "code": "F-01-11-12",
     "level": "Teth",
-    "image": null,
+    "image": "f-01-11-12.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -446,15 +440,14 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-01-11-15",
     "name": "Fairy Longlegs",
     "code": "F-01-11-15",
     "level": "Teth",
-    "image": null,
+    "image": "f-01-11-15.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -481,8 +474,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "t-01-54",
@@ -523,7 +515,7 @@
     "name": "Fragment of the Universe",
     "code": "O-03-60",
     "level": "Teth",
-    "image": null,
+    "image": "o-03-60.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -557,7 +549,7 @@
     "name": "Grave of Cherry Blossoms",
     "code": null,
     "level": "Teth",
-    "image": null,
+    "image": "grave-of-cherry-blossoms.png",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -603,7 +595,7 @@
     "name": "Hurting Teddybear",
     "code": "T-04-16-02",
     "level": "Teth",
-    "image": null,
+    "image": "t-04-16-02.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -646,8 +638,7 @@
         "Either overall Good work with the abnormality causes the qlipoph to drop, either is only attachment good;",
         "very likely that attachment work with other abnormalities also drop que qlipoph count in 1."
       ]
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "o-04-84",
@@ -688,7 +679,7 @@
     "name": "Opened Can of Welchers",
     "code": null,
     "level": "Teth",
-    "image": null,
+    "image": "opened-can-of-welchers.png",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -734,7 +725,7 @@
     "name": "Portrait of a Certain Day",
     "code": "O-02-20-05",
     "level": "Teth",
-    "image": null,
+    "image": "o-02-20-05.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -836,7 +827,7 @@
     "name": "Red Queen",
     "code": "F-01-48",
     "level": "Teth",
-    "image": null,
+    "image": "f-01-48.webp",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -863,8 +854,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "f-01-02",
@@ -929,7 +919,7 @@
     "name": "Skin Prophet",
     "code": "T-03-21-09",
     "level": "Teth",
-    "image": null,
+    "image": "t-03-21-09.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -963,7 +953,7 @@
     "name": "Sleeping Bag of a Bygone Day",
     "code": "T-03-16-15",
     "level": "Teth",
-    "image": null,
+    "image": "t-03-16-15.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -990,8 +980,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "spider-bud",
@@ -1053,7 +1042,7 @@
     "name": "Today's Shy Look",
     "code": "O-01-92",
     "level": "Teth",
-    "image": null,
+    "image": "o-01-92.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1140,7 +1129,7 @@
     "name": "Alleyway Watchdog",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "alleyway-watchdog.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1173,15 +1162,14 @@
         }
       ],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "der-freischutz",
     "name": "Der Freischutz",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "der-freischutz.webp",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -1204,15 +1192,14 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "t-01-68",
     "name": "Funeral of the Dead Butterflies",
     "code": "T-01-68",
     "level": "HE",
-    "image": null,
+    "image": "t-01-68.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1316,7 +1303,7 @@
     "name": "Scarecrow Searching for Wisdom",
     "code": "F-01-87",
     "level": "HE",
-    "image": null,
+    "image": "f-01-87.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1350,7 +1337,7 @@
     "name": "Scaredy Cat",
     "code": "F-02-65",
     "level": "HE",
-    "image": null,
+    "image": "f-02-65.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1384,7 +1371,7 @@
     "name": "Shock Centipede",
     "code": "T-02-11-04",
     "level": "HE",
-    "image": null,
+    "image": "t-02-11-04.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1411,8 +1398,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "singing-machine",
@@ -1463,7 +1449,7 @@
     "name": "Steam Transport Machine",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "steam-transport-machine.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1518,7 +1504,7 @@
     "name": "The Red Shoes",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "the-red-shoes.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": false,
@@ -1561,7 +1547,7 @@
     "name": "The Road Home",
     "code": "F-01-111",
     "level": "HE",
-    "image": null,
+    "image": "f-01-111.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1588,15 +1574,14 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "wayward-passenger",
     "name": "Wayward Passenger",
     "code": null,
     "level": "HE",
-    "image": null,
+    "image": "wayward-passenger.png",
     "notes": "",
     "hasManagerialNotes": false,
     "hasDefensiveNotes": false,
@@ -1632,7 +1617,7 @@
     "name": "White Lake",
     "code": "F-01-249",
     "level": "HE",
-    "image": null,
+    "image": "f-01-249.png",
     "notes": "",
     "hasManagerialNotes": true,
     "hasDefensiveNotes": true,
@@ -1655,8 +1640,7 @@
     "empiricalResearch": {
       "workTable": [],
       "extraObservations": []
-    },
-    "imageSkip": true
+    }
   },
   {
     "id": "o-03-88",

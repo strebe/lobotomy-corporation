@@ -108,7 +108,7 @@ export default function Navbar() {
         <div className="flex items-center divide-x divide-gold/15 border-l border-gold/20">
           <span className="hidden md:flex items-center gap-1.5 px-4 text-[10px] font-mono text-moonstone-dark/55 tracking-wider whitespace-nowrap">
             <kbd className="text-[9px] font-mono text-gold/70 bg-navy-800 border border-gold/35 px-1 py-0.5 leading-none">Ctrl</kbd>
-            +<span className="text-gold/70">1–4</span> to navigate
+            +<span className="text-gold/70">1–5</span> to navigate
           </span>
           <button
             onClick={() => window.dispatchEvent(new Event('open-global-search'))}

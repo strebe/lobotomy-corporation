@@ -1,19 +1,89 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const WORK_TYPES = ['Instinct', 'Insight', 'Attachment', 'Repression']
 
 const WORK_COLORS = {
   Instinct:   'text-red-400/80',
-  Insight:    'text-yellow-400/80',
+  Insight:    'text-white/75',
   Attachment: 'text-purple-400/80',
   Repression: 'text-sky-400/80',
 }
 
 function emptyRow() { return { employee: '', workType: '', itemId: '' } }
 
+function loadFromStorage(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key) ?? 'null') ?? fallback } catch { return fallback }
+}
+
+function EntitySearch({ value, boardItems, usedItems, onChange, selectCls }) {
+  const [open,  setOpen]  = useState(false)
+  const [query, setQuery] = useState('')
+  const ref = useRef(null)
+
+  const selected = boardItems.find(b => b.id === value)
+  const filtered = boardItems
+    .filter(b => !usedItems.has(b.id) || b.id === value)
+    .filter(b => b.name.toLowerCase().includes(query.toLowerCase()))
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e) => { if (!ref.current?.contains(e.target)) setOpen(false) }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [open])
+
+  return (
+    <div ref={ref} className="relative flex-1 min-w-0">
+      {open ? (
+        <input
+          autoFocus
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Search…"
+          className={`${selectCls} w-full`}
+          onKeyDown={e => {
+            if (e.key === 'Escape') { setOpen(false); setQuery('') }
+            if (e.key === 'Enter' && filtered.length > 0) {
+              onChange(filtered[0].id); setOpen(false); setQuery('')
+            }
+          }}
+        />
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className={`${selectCls} w-full text-left truncate ${selected ? '' : 'text-moonstone-dark/40'}`}
+        >
+          {selected ? selected.name : 'Entity'}
+        </button>
+      )}
+      {open && (
+        <div className="absolute top-full left-0 right-0 z-50 bg-navy-900 border border-gold/30 max-h-36 overflow-y-auto">
+          {filtered.length > 0 ? filtered.map(b => (
+            <button
+              key={b.id}
+              onMouseDown={e => e.preventDefault()}
+              onClick={() => { onChange(b.id); setOpen(false); setQuery('') }}
+              className="w-full text-left px-2 py-1.5 text-[11px] font-mono text-moonstone
+                hover:bg-gold/10 transition-colors truncate"
+            >
+              {b.name}
+            </button>
+          )) : (
+            <p className="px-2 py-1.5 text-[10px] font-mono text-moonstone-dark/30 italic">No matches</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function RoundPlannerPanel({ boardItems, employees, setEmployees, onClose }) {
   const [nameInput, setNameInput] = useState('')
-  const [rounds, setRounds]       = useState([emptyRow()])
+  const [rounds, setRounds]       = useState(() => loadFromStorage('companion-rounds', [emptyRow()]))
+  const [floors, setFloors]       = useState(() => loadFromStorage('companion-floors', {}))
+
+  useEffect(() => { localStorage.setItem('companion-rounds', JSON.stringify(rounds)) }, [rounds])
+  useEffect(() => { localStorage.setItem('companion-floors', JSON.stringify(floors)) }, [floors])
 
   function addEmployee() {
     const name = nameInput.trim()
@@ -24,6 +94,7 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
 
   function killEmployee(name) {
     setEmployees(prev => prev.filter(e => e !== name))
+    setFloors(prev => { const next = { ...prev }; delete next[name]; return next })
     setRounds(prev => prev.map(r => r.employee === name ? { ...r, employee: '' } : r))
   }
 
@@ -38,12 +109,16 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
     })
   }
 
-  function resetRound() { setRounds([emptyRow()]) }
+  function resetRound() {
+    const fresh = [emptyRow()]
+    setRounds(fresh)
+    localStorage.setItem('companion-rounds', JSON.stringify(fresh))
+  }
 
   const usedEmployees = new Set(rounds.map(r => r.employee).filter(Boolean))
   const usedItems     = new Set(rounds.map(r => r.itemId).filter(Boolean))
 
-  const selectCls = `w-full bg-navy-900 border border-gold/20 text-[11px] font-mono text-moonstone
+  const selectCls = `bg-navy-900 border border-gold/20 text-[11px] font-mono text-moonstone
     px-2 py-1.5 focus:outline-none focus:border-gold/50 transition-colors cursor-pointer
     appearance-none`
 
@@ -102,12 +177,31 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
               {employees.map(emp => (
                 <div key={emp} className="flex items-center justify-between bg-navy-900/50 border border-gold/10 px-3 py-1.5">
                   <span className="text-xs font-mono text-moonstone truncate">{emp}</span>
-                  <button
-                    onClick={() => killEmployee(emp)}
-                    className="font-mono text-[9px] tracking-widest text-gold/25 hover:text-tier-aleph transition-colors ml-3 shrink-0 uppercase"
-                  >
-                    Kill
-                  </button>
+                  <div className="flex items-center gap-2 ml-3 shrink-0">
+                    {/* Floor selector */}
+                    <div className="flex items-center gap-1">
+                      <span className="font-mono text-[9px] text-gold/25 tracking-widest uppercase mr-0.5">F</span>
+                      {['1', '2', '3'].map(f => (
+                        <button
+                          key={f}
+                          onClick={() => setFloors(prev => ({ ...prev, [emp]: prev[emp] === f ? '' : f }))}
+                          className={`w-4 h-4 flex items-center justify-center font-mono text-[9px] border transition-colors
+                            ${floors[emp] === f
+                              ? 'text-gold border-gold/60 bg-gold/15'
+                              : 'text-gold/25 border-gold/15 hover:text-gold/60 hover:border-gold/35'
+                            }`}
+                        >
+                          {f}
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => killEmployee(emp)}
+                      className="font-mono text-[9px] tracking-widest text-gold/25 hover:text-tier-aleph transition-colors uppercase"
+                    >
+                      Kill
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -127,7 +221,6 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
         <section className="space-y-1.5">
           {rounds.map((row, idx) => (
             <div key={idx} className="space-y-1">
-              {/* Row number */}
               <span className="font-mono text-[9px] text-gold/25 tracking-widest">
                 #{String(idx + 1).padStart(2, '0')}
               </span>
@@ -136,7 +229,7 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
                 <select
                   value={row.employee}
                   onChange={e => updateRound(idx, 'employee', e.target.value)}
-                  className={selectCls}
+                  className={`${selectCls} flex-1`}
                 >
                   <option value="">Employee</option>
                   {employees
@@ -149,24 +242,20 @@ export default function RoundPlannerPanel({ boardItems, employees, setEmployees,
                 <select
                   value={row.workType}
                   onChange={e => updateRound(idx, 'workType', e.target.value)}
-                  className={`${selectCls} ${row.workType ? WORK_COLORS[row.workType] : ''}`}
+                  className={`${selectCls} flex-1 [&>option]:text-moonstone ${row.workType ? WORK_COLORS[row.workType] : ''}`}
                 >
                   <option value="">Work Type</option>
                   {WORK_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                 </select>
 
-                {/* Entity */}
-                <select
+                {/* Entity — searchable */}
+                <EntitySearch
                   value={row.itemId}
-                  onChange={e => updateRound(idx, 'itemId', e.target.value)}
-                  className={selectCls}
-                >
-                  <option value="">Entity</option>
-                  {boardItems
-                    .filter(b => !usedItems.has(b.id) || b.id === row.itemId)
-                    .map(b => <option key={b.id} value={b.id}>{b.name}</option>)
-                  }
-                </select>
+                  boardItems={boardItems}
+                  usedItems={usedItems}
+                  onChange={val => updateRound(idx, 'itemId', val)}
+                  selectCls={selectCls}
+                />
               </div>
             </div>
           ))}

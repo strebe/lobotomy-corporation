@@ -21,7 +21,7 @@ const LEVEL_COLORS = {
 
 const WORK_COLORS = {
   Instinct:   'text-red-400/80',
-  Insight:    'text-yellow-400/80',
+  Insight:    'text-white/75',
   Attachment: 'text-purple-400/80',
   Repression: 'text-sky-400/80',
 }
